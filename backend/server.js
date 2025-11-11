@@ -5,12 +5,12 @@ const app = express();
 const PORT = 2000;
 const pool = require('./db');
 app.use(express.json());
-const cors = required ('cors');
+const cors = require ('cors');
 app.use(cors());
 
 async function startServer() {
     try {
-        const connection = await poolgetConnection();
+        const connection = await pool.getConnection();
         console.log('connected');
 
     }
@@ -40,11 +40,11 @@ app.get('/api/users', async (request, response) => {
 
 app.post('/api/users', async (request, response) =>{
     console.log(request.body)
-    const {Id, username, password_hash, email} = request.body;
+    const { username, password_hash, email} = request.body;
     const [users] = await pool.query('select * from users');
 
        try{
-        const sqlQuery = 'insert into users (Id, username, password_hash, email) values(?, ?, ?, ?)'
+        const sqlQuery = 'insert into users (Id, username, password_hash, email) values(?, ?, ?)'
         const [result] = await pool.query(sqlQuery, [username, password, email]);
         newID = result.insertId,
         response.status(200).json({
@@ -55,5 +55,8 @@ app.post('/api/users', async (request, response) =>{
        catch(error){
         response.status(500).json({error : error})
        }
-})
+});
+
+
+
 
