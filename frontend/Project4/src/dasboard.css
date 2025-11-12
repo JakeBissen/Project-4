@@ -1,0 +1,35 @@
+
+
+.dashboard {
+    font-family: sans-serif;
+}
+
+header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 16px;
+    background: #ebebeb;
+}
+
+.main-layout{
+    display: flex;
+    height: auto;
+}
+
+.sidebar{
+    width: 200px;
+    overflow-y: auto;
+    background: #f4f4f4;
+  padding: 1rem;
+}
+
+.category {
+  margin-bottom: 1rem;
+  cursor: pointer;
+}
+
+.content {
+  flex: 1;
+  padding: 2rem;
+}

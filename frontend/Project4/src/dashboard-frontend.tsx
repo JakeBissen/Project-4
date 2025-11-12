@@ -1,5 +1,10 @@
 import React from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
+import './dasboard.css';
+
+
+const categories = ['Category1', 'Category2', 'Category3', 'Category4', 'Category5'];
+
 
 const Dashboard: React.FC = () => {
   const location = useLocation();
@@ -12,10 +17,25 @@ const Dashboard: React.FC = () => {
 
   return (
     <div className="dashboard">
-      <h1>App Title</h1>
-      <p>Welcome, {username}</p>
-      <button onClick={handleLogout}>Logout</button>
-      {/* Add category sidebar and question viewer here */}
+      <header>
+        <h1>App Title</h1>
+        <div>
+          <span>Welcome, {username}</span>
+          <button onClick={handleLogout}>Logout</button>
+        </div>
+      </header>
+
+      <div className='main-layout'>
+        <aside className='sidebar'>
+          {categories.map((math, index) =>
+          <div key={index} className='category'> {math}
+          </div>)}
+        </aside>
+
+          <section className='content'>
+            <p>Select a Category to view its questions</p>
+            </section>
+      </div>
     </div>
   );
 };
