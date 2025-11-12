@@ -4,14 +4,14 @@ import axios from 'axios';
 import {useNavigate} from 'react-router-dom';
 import './Register.css'
 
-const Register: React.FC = () => {}
-const [username, setUsername] = useState('');
-const [email, setEmail] = useState('');
-const [password, setPassword] = useState('');
-const [errorMsg, setErrorMsg] = useState('');
-const navigate = useNavigate();
+const Register: React.FC = () => {
+  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [errorMsg, setErrorMsg] = useState('');
+  const navigate = useNavigate();
 
-const handleRegister = async (e: React.FormEvent) => {
+  const handleRegister = async (e: React.FormEvent) => {
     e.preventDefault();
     setErrorMsg('');
 
@@ -31,35 +31,35 @@ const handleRegister = async (e: React.FormEvent) => {
       } else {
         setErrorMsg('Registration failed. Try again.');
       }
-    };
+    }
+  };
 
+  return (
+    <div className='resister-container'>
+      <h2>Register</h2>
+      <form onSubmit={handleRegister}>
+        <div>
+          <label>Username:</label>
+          <input
+            placeholder='Enter your Username'
+            type='text'
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+            required />
+        </div>
 
-    return (
-        <div className='resister-container'>
-            <h2>Register</h2>
-            <form onSubmit={handleRegister}>
-                <div>
-                    <label>Username:</label>
-                    <input 
-                    placeholder='Enter your Username'
-                    type='text'
-                    value={username}
-                    onChange={(e) => setUsername(e.target.value)}
-                    required />
-                </div>
+        <div>
+          <label>Email:</label>
+          <input
+            placeholder='Enter your Email'
+            type='email'
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+          />
+        </div>
 
-                <div>
-                    <label>Email:</label>
-                    <input 
-                    placeholder='Enter your Email'
-                    type='email'
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    required
-                    />
-                </div>
-
-                 <div>
+        <div>
           <label>Password:</label>
           <input
             placeholder='Enter your password'
@@ -70,15 +70,15 @@ const handleRegister = async (e: React.FormEvent) => {
           />
         </div>
 
-            {errorMsg && <p className="error">{errorMsg}</p>}
+        {errorMsg && <p className="error">{errorMsg}</p>}
 
-            <button type='submit'>Register</button>
-            </form>
-            <p>
-                <a href='/'>Back to Login</a>
-            </p>
-        </div>
-    );
+        <button type='submit'>Register</button>
+      </form>
+      <p>
+        <a href='/'>Back to Login</a>
+      </p>
+    </div>
+  );
 };
 
 

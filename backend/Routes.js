@@ -53,3 +53,28 @@ router.post('/register', async (req, res) => {
 
 module.exports = router;
 
+
+
+
+router.get('/questions/:category', async (req, res) => {
+    const categoryName = req.params.category;
+
+    try {
+    const [categoryRows] = await pool.query('SELECT id FROM categories WHERE name = ?', [categoryName]);
+    if (categoryRows.length === 0) {
+      return res.status(404).json([]);
+    }
+
+    const categoryId = categoryRows[0].id;
+    const [questions] = await pool.query(
+      'SELECT id, title, body FROM questions WHERE category_id = ? ORDER BY created_at DESC',
+      [categoryId]
+    );
+
+    res.json(questions);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json([]);
+  }
+
+});

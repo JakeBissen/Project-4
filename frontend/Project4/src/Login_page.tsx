@@ -38,6 +38,7 @@ return (
         <div>
           <label>Username:</label>
           <input
+          placeholder='Enter Username'
             type="text"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
@@ -48,6 +49,7 @@ return (
         <div>
           <label>Password:</label>
           <input
+          placeholder='Enter password'
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
