@@ -4,8 +4,8 @@ import axios from 'axios';
 import { Container, Row, Col, Card, ListGroup } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css'
-import Login from './Login';
-import Dashboard from './Dashboard';
+import Login from './Login_page';
+import Dashboard from './dashboard-frontend';
 
 
 function App() {
