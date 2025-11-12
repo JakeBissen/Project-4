@@ -1,0 +1,14 @@
+
+
+.register-container {
+  max-width: 400px;
+  margin: auto;
+  padding: 2rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+}
+
+.error {
+  color: red;
+  margin-top: 0.5rem;
+}

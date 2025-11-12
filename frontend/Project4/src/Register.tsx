@@ -2,6 +2,7 @@
 import React, {useState} from 'react';
 import axios from 'axios';
 import {useNavigate} from 'react-router-dom';
+import './Register.css'
 
 const Register: React.FC = () => {}
 const [username, setUsername] = useState('');
