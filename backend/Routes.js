@@ -1,34 +1,36 @@
 
 
-router.post('/login', async (req,res) => {
-    const {username, password} = req.body;
-
-    try {
-        const [rows] = await pool.query('select * from users where username = ?', [username]);
-        if (rows.length === 0) {
-            return res.status(401).json({ error: 'Invalid username or password' });
-        }
-        const user = rows[0];
-        const isValid = await bcrypt.compare(password, user.password_hash);
-
-        if (!isValid) {
-            return res.status(401).json({ error: 'Invalid username or password' });
-        }
-        res.json({ message: 'Login Successful', username: user.username });
-    } catch (error) {
-        console.log(error);
-        res.status(500).json({ error: 'Internal server error' });
-    }
-    
-});
-
-
-
 const express = require('express');
 const bcrypt = require('bcrypt');
-const pool = require('../db');
+const db = require('./db');
+const pool = require('./db');
+
 
 const router = express.Router();
+
+router.post('/login', async (req, res) => {
+  const { username, password } = req.body;
+
+ try {
+  const [users] = await pool.query('SELECT * FROM users WHERE username = ?', [username]);
+
+  if (users.length === 0) {
+    return res.status(401).json({message: 'invalid credentials'});
+  }
+  const user = users[0];
+  const match = await bcrypt.compare(password, user.password_hash);
+
+  if(!match) {
+    return res.status(401).json({ message: 'invalid credentials'});
+  }
+
+  res.json({message: 'Login successful', username: user.username });
+ } catch (err) {
+  console.error(err);
+  res.status(500).json({message: 'server error'});
+ }
+});
+
 
 router.post('/register', async (req, res) => {
   const { username, password, email } = req.body;
@@ -51,7 +53,7 @@ router.post('/register', async (req, res) => {
   }
 });
 
-module.exports = router;
+
 
 
 
@@ -78,3 +80,5 @@ router.get('/questions/:category', async (req, res) => {
   }
 
 });
+
+module.exports = router;

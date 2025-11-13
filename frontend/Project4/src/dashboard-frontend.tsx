@@ -1,63 +1,68 @@
-import React, {useState, useEffect} from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-
 import './dasboard.css';
-
 
 const categories = ['JavaScript', 'React', 'Vue', 'CSS', 'HTML'];
 
 const Dashboard: React.FC = () => {
-  const location = useLocation();
   const navigate = useNavigate();
-  const username = (location.state as any)?.username || 'Guest';
+  const username = localStorage.getItem('username') || 'Guest';
 
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const [questions, setQuestions] = useState<any[]>([]);
 
   const handleLogout = () => {
-    navigate('/');
+    localStorage.removeItem('token');
+    localStorage.removeItem('username');
+    navigate('/login');
   };
 
   const fetchQuestions = async (category: string) => {
     try {
-      const response = await axios.get(`http://localhost:2000/api/questions/${category}`);
-      setQuestions(response.data);
-    } catch (error){
-      console.error('error fetching questions', error);
+      const res = await axios.get(`http://localhost:2000/api/questions/${category}`);
+      setQuestions(res.data);
+    } catch (err) {
+      console.error('Error fetching questions:', err);
       setQuestions([]);
     }
   };
 
   useEffect(() => {
-    if (selectedCategory){
-      fetchQuestions(selectedCategory)
+    if (selectedCategory) {
+      fetchQuestions(selectedCategory);
     }
-  },[selectedCategory]);
+  }, [selectedCategory]);
 
   return (
     <div className="dashboard">
-      <header>
-        <h1>App Title</h1>
-        
+      <header className="bg-light text-center py-3 shadow-sm">
+        <h2>Welcome, {username}!</h2>
       </header>
 
-      <div className='main-layout'>
-        <aside className='sidebar'>
-          {categories.map((math, index) =>
-          <div key={index} className='category'> {math}
-          </div>)}
+      <div className="main-layout">
+        <aside className="sidebar">
+          <h5>Select a Category:</h5>
+          {categories.map((cat, index) => (
+            <div
+              key={index}
+              className={`category ${selectedCategory === cat ? 'active' : ''}`}
+              onClick={() => setSelectedCategory(cat)}
+            >
+              {cat}
+            </div>
+          ))}
         </aside>
 
-          <section className="content">
+        <section className="content">
           {!selectedCategory ? (
-            <p>Select a Category to view its questions.</p>
+            <p className="text-muted">Choose a category to view questions.</p>
           ) : questions.length === 0 ? (
-            <p>No questions found for {selectedCategory}.</p>
+            <p>No questions found for <strong>{selectedCategory}</strong>.</p>
           ) : (
-            <ul>
+            <ul className="list-group">
               {questions.map((q) => (
-                <li key={q.id}>
+                <li key={q.id} className="list-group-item">
                   <strong>{q.title}</strong>
                   <p>{q.body}</p>
                 </li>
@@ -66,10 +71,10 @@ const Dashboard: React.FC = () => {
           )}
         </section>
       </div>
-      <button onClick={() => {
-  localStorage.removeItem('token');
-  navigate('/login');
-}}>Logout</button>
+
+      <div className="text-center my-4">
+        <button className="btn btn-danger" onClick={handleLogout}>Logout</button>
+      </div>
     </div>
   );
 };

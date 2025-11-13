@@ -1,12 +1,15 @@
 
-
+const routes = require('./Routes');
 const express = require('express');
 const app = express();
 const PORT = 2000;
 const pool = require('./db');
 app.use(express.json());
 const cors = require ('cors');
+const router = require('./Routes');
 app.use(cors());
+app.use('/api', router);
+
 
 async function startServer() {
     try {
