@@ -6,9 +6,8 @@ const PORT = 2000;
 const pool = require('./db');
 app.use(express.json());
 const cors = require ('cors');
-const router = require('./Routes');
 app.use(cors());
-app.use('/api', router);
+app.use('/api', routes);
 
 
 async function startServer() {
@@ -41,24 +40,22 @@ app.get('/api/users', async (request, response) => {
     }
 });
 
-app.post('/api/users', async (request, response) =>{
-    console.log(request.body)
-    const { username, password_hash, email} = request.body;
-    const [users] = await pool.query('select * from users');
+// app.post('/api/users', async (request, response) => {
+//   const { username, password_hash, email } = request.body;
 
-       try{
-        const sqlQuery = 'insert into users (Id, username, password_hash, email) values(?, ?, ?)'
-        const [result] = await pool.query(sqlQuery, [username, password, email]);
-        newID = result.insertId,
-        response.status(200).json({
-            UserID: result.insertId,
-            message: 'data inserted'
-        })
-       }
-       catch(error){
-        response.status(500).json({error : error})
-       }
-});
+//   try {
+//     const sqlQuery = 'INSERT INTO users (username, password_hash, email) VALUES (?, ?, ?)';
+//     const [result] = await pool.query(sqlQuery, [username, password_hash, email]);
+
+//     response.status(200).json({
+//       userId: result.insertId,
+//       message: 'User registered successfully',
+//     });
+//   } catch (error) {
+//     console.error('Registration error:', error);
+//     response.status(500).json({ error: 'Internal server error' });
+//   }
+// });
 
 
 

@@ -17,10 +17,10 @@ const Register: React.FC = () => {
 
     try {
       const response = await axios.post('http://localhost:2000/api/register', {
-        username,
-        password,
-        email,
-      });
+  username,
+  password,
+  email,
+});
 
       if (response.status === 201) {
         navigate('/');

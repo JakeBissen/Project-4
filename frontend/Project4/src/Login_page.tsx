@@ -10,23 +10,25 @@ const Login: React.FC = () => {
   const navigate = useNavigate();
 
   const handleLogin = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setErrorMsg('');
+  e.preventDefault();
+  setErrorMsg('');
 
-    try {
-      const res = await axios.post('http://localhost:2000/api/login', {
-        username,
-        password,
-      });
+  try {
+    const res = await axios.post('http://localhost:2000/api/login', {
+      username,
+      password,
+    });
 
-      if (res.data.message === 'Login successful') {
-        localStorage.setItem('username', res.data.username);
-        navigate('/dashboard');
-      }
-    } catch (err: any) {
+    if (res.data.message === 'Login successful') {
+      localStorage.setItem('username', res.data.username);
+      navigate('/dashboard');
+    } else {
       setErrorMsg('Login failed. Please check your credentials.');
     }
-  };
+  } catch (err: any) {
+    setErrorMsg('Login failed. Please check your credentials.');
+  }
+};
 
   return (
     <div className="login-box">
