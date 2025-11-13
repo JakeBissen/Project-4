@@ -20,9 +20,11 @@ const Login: React.FC = () => {
     });
 
     if (res.data.message === 'Login successful') {
-      localStorage.setItem('username', res.data.username);
-      navigate('/dashboard');
-    } else {
+  localStorage.setItem('username', res.data.username);
+  localStorage.setItem('email', res.data.email);
+  navigate('/dashboard');
+}
+ else {
       setErrorMsg('Login failed. Please check your credentials.');
     }
   } catch (err: any) {

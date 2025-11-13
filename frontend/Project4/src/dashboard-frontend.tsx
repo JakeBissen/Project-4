@@ -8,14 +8,16 @@ const categories = ['JavaScript', 'React', 'Vue', 'CSS', 'HTML'];
 const Dashboard: React.FC = () => {
   const navigate = useNavigate();
   const username = localStorage.getItem('username') || 'Guest';
+const email = localStorage.getItem('email') || 'Not provided';
+
 
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const [questions, setQuestions] = useState<any[]>([]);
 
   const handleLogout = () => {
-    localStorage.removeItem('token');
-    localStorage.removeItem('username');
-    navigate('/login');
+      localStorage.clear();
+  navigate('/login');
+
   };
 
   const fetchQuestions = async (category: string) => {
@@ -37,9 +39,15 @@ const Dashboard: React.FC = () => {
   return (
     <div className="dashboard">
       <header className="bg-light text-center py-3 shadow-sm">
-        <h2>Welcome, {username}!</h2>
-      </header>
-
+  <img
+    src={`https://ui-avatars.com/api/?name=${encodeURIComponent(username)}&background=random`}
+    alt="avatar"
+    className="rounded-circle mb-2"
+    width="80"
+  />
+  <h2>Welcome, {username}!</h2>
+  <p className="text-muted">{email}</p>
+</header>
       <div className="main-layout">
         <aside className="sidebar">
           <h5>Select a Category:</h5>

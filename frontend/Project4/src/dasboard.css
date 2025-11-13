@@ -39,3 +39,12 @@
   padding: 2rem;
   min-width: 300px;
 }
+
+header img {
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
+}
+.category.active {
+  font-weight: bold;
+  color: #007bff;
+}
+
