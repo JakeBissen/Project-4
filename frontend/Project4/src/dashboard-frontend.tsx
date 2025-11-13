@@ -39,10 +39,7 @@ const Dashboard: React.FC = () => {
     <div className="dashboard">
       <header>
         <h1>App Title</h1>
-        <div>
-          <span>Welcome, {username}</span>
-          <button onClick={handleLogout}>Logout</button>
-        </div>
+        
       </header>
 
       <div className='main-layout'>
@@ -69,6 +66,10 @@ const Dashboard: React.FC = () => {
           )}
         </section>
       </div>
+      <button onClick={() => {
+  localStorage.removeItem('token');
+  navigate('/login');
+}}>Logout</button>
     </div>
   );
 };

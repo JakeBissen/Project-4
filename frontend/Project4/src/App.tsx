@@ -7,24 +7,32 @@ import Login from './Login_page';
 import Dashboard from './dashboard-frontend';
 import Register from './Register';
 import Homepage from './Homepage';
+import Navbar from './Navbar';
+import ProtectedRoute from './ProtectedRoutes';
 
 
 function App() {
 
 
  
-  
+
 
   return (
     <>
     <Router>
-     <Routes>
-    <Route path='/' element={<Homepage />} />
-     <Route path='/login' element={<Login />} />
-      <Route path='/register' element={<Register />} />
-       <Route path='/dashboard' element={<Dashboard />} />
-  </Routes>
-  </Router>o
+      <Navbar />
+   <Routes>
+  <Route path='/' element={<Homepage />} />
+   <Route path='/login' element={<Login />} />
+    <Route path='/register' element={<Register />} />
+     <Route path="/dashboard" element={
+        <ProtectedRoute>
+          <Dashboard />
+        </ProtectedRoute>
+      }
+     />
+</Routes>
+  </Router>
     </>
   )
 }
