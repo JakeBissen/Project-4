@@ -12,3 +12,15 @@
   color: red;
   margin-top: 0.5rem;
 }
+
+.register-page {
+  background: linear-gradient(to right, #f8f9fa, #e9ecef);
+}
+
+.card {
+  border-radius: 12px;
+}
+
+.card h3 {
+  font-weight: 600;
+}

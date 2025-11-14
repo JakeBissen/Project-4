@@ -40,3 +40,23 @@
 .read-the-docs {
   color: #888;
 }
+
+
+.app-wrapper {
+  background-color: #f8f9fa;
+}
+
+.sidebar {
+  background-color: #ffffff;
+}
+
+@media (max-width: 768px) {
+  .sidebar {
+    border-right: none;
+    border-bottom: 1px solid #ddd;
+  }
+
+  .flex-md-row {
+    flex-direction: column !important;
+  }
+}
