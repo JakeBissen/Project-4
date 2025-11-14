@@ -11,7 +11,7 @@ const Navbar: React.FC = () => {
 
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark px-4">
-      <Link className="navbar-brand" to="/">Project 4</Link>
+      <Link className="navbar-brand" to="/">The Devlogs</Link>
       <div className="collapse navbar-collapse">
         <ul className="navbar-nav ms-auto">
           <li className="nav-item">

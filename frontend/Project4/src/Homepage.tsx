@@ -7,7 +7,8 @@ const Homepage: React.FC = () => {
 
   return (
     <div className="homepage-container">
-      <h1>Welcome to Project 4</h1>
+      <h1>Welcome to The Devlogs!</h1>
+      <h2>A place to answer all of your software needs</h2>
       <p>Select a section to begin:</p>
       <div className="button-group">
         <button onClick={() => navigate('/login')}>Login</button>
