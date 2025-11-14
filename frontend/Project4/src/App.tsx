@@ -8,7 +8,6 @@ import Dashboard from './dashboard-frontend';
 import Register from './Register';
 import Homepage from './Homepage';
 import Navbar from './Navbar';
-import ProtectedRoute from './ProtectedRoutes';
 
 
 function App() {
@@ -25,10 +24,7 @@ function App() {
   <Route path='/' element={<Homepage />} />
    <Route path='/login' element={<Login />} />
     <Route path='/register' element={<Register />} />
-     <Route path="/dashboard" element={
-        <ProtectedRoute>
-          <Dashboard />
-        </ProtectedRoute>
+     <Route path="/dashboard" element={<Dashboard />
       }
      />
 </Routes>
